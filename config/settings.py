@@ -90,10 +90,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',   # Replace with your database name
-        'USER': 'myuser',   # Replace with your PostgreSQL username
-        'PASSWORD': 'mypassword',    # Replace with your PostgreSQL password          # Or your remote database host
-        'PORT': '5432',                 # Default PostgreSQL port
+        'NAME': os.getenv('POSTGRES_DB', 'mydatabase'),
+        'USER': os.getenv('POSTGRES_USER', 'myuser'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'mypassword'),
+        'HOST': 'db',  # Use 'db', which is the service name in docker-compose.yml
+        'PORT': '5432',
     }
 }
 
